@@ -14,12 +14,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.compose.Circle
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MarkerInfoWindow
@@ -72,8 +74,8 @@ fun CustomMapView(modifier: Modifier, list: List<MapPin>) {
     ) {
         list.forEach { mapPin ->
             MarkerInfoWindow(
-                state = MarkerState(position = mapPin.coordinate),
-                icon = context.bitmapDescriptorFromVector(R.drawable.ico_pin),
+                state = MarkerState(mapPin.coordinate),
+                icon = context.bitmapDescriptorFromVector(R.drawable.location_marker),
                 onInfoWindowClick = {
                     Toast.makeText(context, "Clicked on " + mapPin.name, Toast.LENGTH_SHORT).show()
                 }
@@ -90,6 +92,13 @@ fun CustomMapView(modifier: Modifier, list: List<MapPin>) {
                     text = mapPin.name
                 )
             }
+            Circle(
+                center = mapPin.coordinate,
+                radius = mapPin.accuracy,
+                fillColor = Color.Red.copy(alpha = 0.2f),
+                strokeColor = Color.Red,
+                strokeWidth = with(LocalDensity.current) { 1.dp.toPx() }
+            )
         }
     }
 }

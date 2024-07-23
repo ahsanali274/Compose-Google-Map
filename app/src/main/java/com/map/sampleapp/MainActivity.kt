@@ -20,10 +20,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val list = listOf(
-            MapPin("santiago", LatLng(-33.4489, -70.6693)),
-            MapPin("bogota", LatLng(-4.7110, -74.0721)),
-            MapPin("lima", LatLng(4-12.0464, -77.0428)),
-            MapPin("salvador", LatLng(-12.9777, -38.5016))
+            MapPin("The Empire State Building", LatLng(40.748817, -73.985428), 50.0),
+            MapPin("central park", LatLng(40.785091, -73.968285), 500.0),
+            MapPin("JFK Airport", LatLng(40.641766, -73.780968), 1000.0),
+            MapPin("Statue of Liberty", LatLng(40.689247, -74.044502), 200.0)
         )
 
         setContent {
